@@ -221,32 +221,40 @@
 
       <!-- Main Content -->
       <main class="flex-1 max-w-6xl mx-auto w-full px-4 pt-4 pb-24">
-        <!-- Tabs -->
-        <div class="mb-2 border-b border-slate-200 flex gap-2 overflow-x-auto no-scrollbar flex-nowrap md:flex-wrap">
-          <button data-tab="dashboard" class="tab-button px-4 py-2 text-sm font-medium rounded-t bg-white border border-b-0 border-slate-200 shadow-sm whitespace-nowrap">Dashboard</button>
-          <button data-tab="keluarga" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Keluarga (KK &amp; Warga)</button>
-          <button data-tab="kk" class="tab-button hidden text-slate-600 text-sm font-medium rounded-t whitespace-nowrap">Data KK</button>
-          <button data-tab="warga" class="tab-button hidden text-slate-600 text-sm font-medium rounded-t whitespace-nowrap">Data Warga</button>
-          <button data-tab="aset" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Inventaris Aset</button>
-          <button data-tab="keuangan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Keuangan</button>
-          <button data-tab="pengumuman" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Pengumuman</button>
-          <button data-tab="kegiatan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Kegiatan</button>
-          <button data-tab="surat" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Surat Menyurat</button>
-          <button data-tab="admin" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 requires-manage whitespace-nowrap">Dashboard Admin</button>
-          <button data-tab="pengaturan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 requires-manage whitespace-nowrap">Pengaturan</button>
-        </div>
+        <div class="rt-layout mt-1">
+          <!-- Sidebar Navigasi -->
+          <aside class="rt-sidebar w-full md:w-60 p-3">
+            <div class="mb-3">
+              <p class="text-[11px] font-semibold text-slate-600 uppercase tracking-wide">Navigasi</p>
+            </div>
+            <div class="flex md:flex-col gap-2 overflow-x-auto no-scrollbar md:overflow-visible">
+              <button data-tab="dashboard" class="tab-button px-4 py-2 text-sm font-medium bg-white border border-slate-200 shadow-sm whitespace-nowrap flex-shrink-0">Dashboard</button>
+              <button data-tab="keluarga" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 whitespace-nowrap flex-shrink-0">Keluarga (KK &amp; Warga)</button>
+              <button data-tab="kk" class="tab-button hidden text-slate-600 text-sm font-medium whitespace-nowrap flex-shrink-0">Data KK</button>
+              <button data-tab="warga" class="tab-button hidden text-slate-600 text-sm font-medium whitespace-nowrap flex-shrink-0">Data Warga</button>
+              <button data-tab="aset" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 whitespace-nowrap flex-shrink-0">Inventaris Aset</button>
+              <button data-tab="keuangan" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 whitespace-nowrap flex-shrink-0">Keuangan</button>
+              <button data-tab="pengumuman" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 whitespace-nowrap flex-shrink-0">Pengumuman</button>
+              <button data-tab="kegiatan" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 whitespace-nowrap flex-shrink-0">Kegiatan</button>
+              <button data-tab="surat" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 whitespace-nowrap flex-shrink-0">Surat Menyurat</button>
+              <button data-tab="admin" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 requires-manage whitespace-nowrap flex-shrink-0">Dashboard Admin</button>
+              <button data-tab="pengaturan" class="tab-button px-4 py-2 text-sm font-medium text-slate-600 requires-manage whitespace-nowrap flex-shrink-0">Pengaturan</button>
+            </div>
+          </aside>
 
-        <!-- Back to dashboard -->
-        <div class="mb-4 flex justify-end">
-          <button id="btn-back-dashboard" class="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-600">
-            <span>&larr;</span>
-            <span>Kembali ke Dashboard</span>
-          </button>
-        </div>
+          <!-- Area Konten -->
+          <section class="flex-1">
+            <!-- Back to dashboard -->
+            <div class="mb-4 flex justify-end">
+              <button id="btn-back-dashboard" class="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-600">
+                <span>&larr;</span>
+                <span>Kembali ke Dashboard</span>
+              </button>
+            </div>
 
-        <!-- Panels -->
-        <!-- Dashboard Utama -->
-        <section id="tab-dashboard" class="tab-panel">
+            <!-- Panels -->
+            <!-- Dashboard Utama -->
+            <section id="tab-dashboard" class="tab-panel">
           <!-- Hero / Home-style card -->
           <div class="card-soft rounded-2xl p-4 mb-4 bg-gradient-to-br from-sky-500 via-indigo-500 to-slate-900 text-white relative overflow-hidden">
             <div class="flex flex-col items-start gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
