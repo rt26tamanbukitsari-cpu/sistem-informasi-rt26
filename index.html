@@ -154,6 +154,15 @@
         0 2px 4px var(--shadow-light);
       background: var(--bg-surface);
     }
+
+    /* Utility: hide scrollbar for horizontal tab nav on mobile */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
   </style>
 </head>
 <body class="text-slate-800">
@@ -213,18 +222,18 @@
       <!-- Main Content -->
       <main class="flex-1 max-w-6xl mx-auto w-full px-4 pt-4 pb-24">
         <!-- Tabs -->
-        <div class="mb-2 border-b border-slate-200 flex flex-wrap gap-2">
-          <button data-tab="dashboard" class="tab-button px-4 py-2 text-sm font-medium rounded-t bg-white border border-b-0 border-slate-200 shadow-sm">Dashboard</button>
-          <button data-tab="keluarga" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600">Keluarga (KK &amp; Warga)</button>
-          <button data-tab="kk" class="tab-button hidden text-slate-600 text-sm font-medium rounded-t">Data KK</button>
-          <button data-tab="warga" class="tab-button hidden text-slate-600 text-sm font-medium rounded-t">Data Warga</button>
-          <button data-tab="aset" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600">Inventaris Aset</button>
-          <button data-tab="keuangan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600">Keuangan</button>
-          <button data-tab="pengumuman" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600">Pengumuman</button>
-          <button data-tab="kegiatan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600">Kegiatan</button>
-          <button data-tab="surat" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600">Surat Menyurat</button>
-          <button data-tab="admin" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 requires-manage">Dashboard Admin</button>
-          <button data-tab="pengaturan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 requires-manage">Pengaturan</button>
+        <div class="mb-2 border-b border-slate-200 flex gap-2 overflow-x-auto no-scrollbar flex-nowrap md:flex-wrap">
+          <button data-tab="dashboard" class="tab-button px-4 py-2 text-sm font-medium rounded-t bg-white border border-b-0 border-slate-200 shadow-sm whitespace-nowrap">Dashboard</button>
+          <button data-tab="keluarga" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Keluarga (KK &amp; Warga)</button>
+          <button data-tab="kk" class="tab-button hidden text-slate-600 text-sm font-medium rounded-t whitespace-nowrap">Data KK</button>
+          <button data-tab="warga" class="tab-button hidden text-slate-600 text-sm font-medium rounded-t whitespace-nowrap">Data Warga</button>
+          <button data-tab="aset" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Inventaris Aset</button>
+          <button data-tab="keuangan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Keuangan</button>
+          <button data-tab="pengumuman" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Pengumuman</button>
+          <button data-tab="kegiatan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Kegiatan</button>
+          <button data-tab="surat" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 whitespace-nowrap">Surat Menyurat</button>
+          <button data-tab="admin" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 requires-manage whitespace-nowrap">Dashboard Admin</button>
+          <button data-tab="pengaturan" class="tab-button px-4 py-2 text-sm font-medium rounded-t text-slate-600 requires-manage whitespace-nowrap">Pengaturan</button>
         </div>
 
         <!-- Back to dashboard -->
@@ -240,7 +249,7 @@
         <section id="tab-dashboard" class="tab-panel">
           <!-- Hero / Home-style card -->
           <div class="card-soft rounded-2xl p-4 mb-4 bg-gradient-to-br from-sky-500 via-indigo-500 to-slate-900 text-white relative overflow-hidden">
-            <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-col items-start gap-2 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
               <div>
                 <p class="text-xs text-sky-100/80">Selamat datang di Dashboard RT 26</p>
                 <p class="text-[11px] text-sky-100/80 mt-1">Kelola data warga, aset, kas &amp; surat dalam satu aplikasi.</p>
@@ -1748,6 +1757,23 @@
         }
         userRoleEl.textContent = roleLabel;
         body.classList.toggle('role-warga', currentUser.role === 'warga');
+
+        // Batasi akses modul Surat Menyurat hanya untuk Ketua RT & Sekretaris
+        const suratTabBtn = document.querySelector('[data-tab="surat"]');
+        const suratSection = document.getElementById('tab-surat');
+        if (suratTabBtn && suratSection) {
+          const canAccessSurat = currentUser.role === 'ketua' || currentUser.role === 'sekretaris';
+          if (canAccessSurat) {
+            suratTabBtn.classList.remove('hidden');
+          } else {
+            suratTabBtn.classList.add('hidden');
+            suratSection.classList.add('hidden');
+            // Pastikan tidak tertinggal di tab surat jika role tidak berhak
+            if (window.switchTab) {
+              window.switchTab('dashboard');
+            }
+          }
+        }
       } else {
         loginPage.classList.remove('hidden');
         appPage.classList.add('hidden');
