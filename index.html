@@ -91,22 +91,23 @@
         -9px -9px 16px var(--shadow-light);
     }
 
-    /* Sidebar mobile: hidden by default, slide-in on toggle */
+    /* Sidebar mobile: collapsed (width 0) and slide-in on toggle */
     @media (max-width: 767px) {
       .rt-sidebar {
-        display: none;
         position: fixed;
         top: 4.25rem; /* kira-kira tinggi header */
         left: 0;
         bottom: 0;
-        width: 260px;
+        width: 0; /* collapsed by default */
         max-width: 80vw;
         z-index: 40;
+        overflow-x: hidden;
         overflow-y: auto;
+        transition: width 0.5s ease;
       }
 
       body.sidebar-open .rt-sidebar {
-        display: block;
+        width: 260px; /* expanded width */
       }
 
       #sidebar-backdrop {
@@ -119,6 +120,15 @@
 
       body.sidebar-open {
         overflow: hidden;
+      }
+
+      /* Push main content to the right when sidebar is open */
+      #main {
+        transition: margin-left 0.5s ease;
+      }
+
+      body.sidebar-open #main {
+        margin-left: 260px;
       }
     }
 
@@ -247,7 +257,7 @@
       <div id="sidebar-backdrop" class="fixed inset-0 bg-black/30 z-30 hidden md:hidden"></div>
 
       <!-- Main Content -->
-      <main class="flex-1 max-w-6xl mx-auto w-full px-4 pt-4 pb-24">
+      <main id="main" class="flex-1 max-w-6xl mx-auto w-full px-4 pt-4 pb-24">
         <!-- Tombol toggle sidebar (mobile) -->
         <button id="sidebar-toggle" class="md:hidden inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full border border-slate-300 bg-[var(--bg-surface)] text-slate-700 shadow-sm mb-2">
           <span class="text-base font-semibold">☰</span>
