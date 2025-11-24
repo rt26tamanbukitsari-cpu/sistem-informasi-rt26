@@ -94,15 +94,16 @@
     /* Sidebar mobile: collapsed (width 0) and slide-in on toggle */
     @media (max-width: 767px) {
       .rt-sidebar {
+        height: 100%; /* Full height */
+        width: 0; /* Collapsed by default */
         position: fixed;
-        top: 4.25rem; /* kira-kira tinggi header */
-        left: 0;
-        bottom: 0;
-        width: 0; /* collapsed by default */
-        max-width: 80vw;
         z-index: 40;
+        top: 0;
+        left: 0;
+        background: var(--bg-surface);
         overflow-x: hidden;
         overflow-y: auto;
+        padding-top: 60px; /* space from top like example */
         transition: width 0.5s ease;
       }
 
@@ -232,6 +233,7 @@
 
     <!-- Halaman Aplikasi -->
     <div id="app-page" class="flex-1 flex flex-col hidden">
+      <div id="main" class="flex-1 flex flex-col">
       <!-- Header -->
       <header class="rt-header text-white shadow-2xl">
         <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -257,7 +259,7 @@
       <div id="sidebar-backdrop" class="fixed inset-0 bg-black/30 z-30 hidden md:hidden"></div>
 
       <!-- Main Content -->
-      <main id="main" class="flex-1 max-w-6xl mx-auto w-full px-4 pt-4 pb-24">
+      <main class="flex-1 max-w-6xl mx-auto w-full px-4 pt-4 pb-24">
         <!-- Tombol toggle sidebar (mobile) -->
         <button id="sidebar-toggle" class="md:hidden inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full border border-slate-300 bg-[var(--bg-surface)] text-slate-700 shadow-sm mb-2">
           <span class="text-base font-semibold">☰</span>
